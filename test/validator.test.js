@@ -29,7 +29,7 @@ module.exports = {
         var invalid = [
             'invalidemail@',
             'invalid.com',
-            '@invalid.com'
+            '@invalid.com',
         ];
         invalid.forEach(function(email) {
             try {
@@ -66,7 +66,8 @@ module.exports = {
             '.com',
             'http://com/',
             'http://300.0.0.1/',
-            'mailto:foo@bar.com'
+            'mailto:foo@bar.com',
+            'https://docs.google.com/a/urlbox.io/viewer?url=http://www.unicef.org/lac/Reunion_Nutricion_1_21_2011.pdf&embedded=true'
         ];
         invalid.forEach(function(url) {
             try {
@@ -92,7 +93,9 @@ module.exports = {
             'http://189.123.14.13/',
             'http://duckduckgo.com/?q=%2F',
             'http://foobar.com/t$-_.+!*\'(),',
-            'http://localhost:3000/'
+            'http://localhost:3000/',
+            'https://docs.google.com/a/urlbox.io/viewer?url=http://www.unicef.org/lac/Reunion_Nutricion_1_21_2011.pdf&embedded=true',
+            'http://padlet.com/wall/rjfro9z47e'
         ];
         try {
             valid.forEach(function(url) {
@@ -101,6 +104,30 @@ module.exports = {
         } catch(e) {
             assert.ok(false, 'A valid url did not pass validation');
         }
+    },
+
+    'test #isLessStrictUrl()': function() {
+
+      var invalid = [
+        'xyz://foobar.com', //Only http, https and ftp are valid
+        'invalid/',
+        'invalid.x',
+        'invalid.',
+        '.com',
+        'http://com/',
+        'http://300.0.0.1/',
+        'mailto:foo@bar.com'
+      ];
+      invalid.forEach(function(url) {
+        try {
+          Validator.check(url, 'Invalid').isLessStrictUrl();
+          assert.ok(false, 'Invalid url ('+url+') passed validation');
+        } catch(e) {
+          assert.equal('Invalid', e.message);
+        }
+      });
+
+
     },
 
     'test #isIP()': function () {
