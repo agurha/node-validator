@@ -654,6 +654,17 @@
       return this;
     }
 
+    Validator.prototype.isInvalidValidUrlExtension = function() {
+
+      var dodgyFileExtensions = /^.*\.(MOV|csv|wmv|pub|avi|IFO|3gp|ggb)$/;
+
+      if(this.str.match(dodgyFileExtensions)) {
+        return this.error(this.msg || 'Url Extension not valid');
+
+      }
+      return this;
+    }
+
     Validator.prototype.isIPv4 = function() {
         if (internal_is_ipv4(this.str)) {
             return this;

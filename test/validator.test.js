@@ -67,7 +67,6 @@ module.exports = {
             'http://com/',
             'http://300.0.0.1/',
             'mailto:foo@bar.com',
-            'https://docs.google.com/a/urlbox.io/viewer?url=http://www.unicef.org/lac/Reunion_Nutricion_1_21_2011.pdf&embedded=true'
         ];
         invalid.forEach(function(url) {
             try {
@@ -128,6 +127,46 @@ module.exports = {
       });
 
 
+    },
+
+    'test #isValidUrlExtension()' : function() {
+
+      var invalid = [
+
+        'http://up.wallwisher.net/20130518/d189bd8943a7c4a23e57dd23d062d867.ggb',
+        'http://up.wallwisher.net/20130518/d509397790becb8f4e9138bc3f8e9045.wmv',
+        'http://padlet.com/wall/1qapq4spj4.csv',
+        'http://up.wallwisher.net/20130518/bb18b3321061f60c0fd7f055503d2e89.MOV',
+        'http://up.wallwisher.net/20130518/a5e464e17afa5168f0e1c813d4c6202b.pub',
+        'http://up.wallwisher.net/20130518/2db14e8190739a2f7d2cfe3353806e11.IFO',
+
+      ];
+      invalid.forEach(function(url){
+
+        try {
+
+          Validator.check(url, 'Invalid').isInvalidValidUrlExtension();
+
+        } catch(e) {
+
+          assert.ok(false, 'An invalid url passed validation');
+        }
+
+      });
+
+//      //Now try some valid ones
+//      var valid = [
+//        'https://skydrive.live.com/?cid=FCC990F3AF233886&id=FCC990F3AF233886%21559',
+//        'https://docs.google.com/a/urlbox.io/viewer?url=http://www.unicef.org/lac/Reunion_Nutricion_1_21_2011.pdf&embedded=true',
+//        'http://padlet.com/wall/rjfro9z47e'
+//      ];
+//      try {
+//        valid.forEach(function(url) {
+//          Validator.check(url).isUrl();
+//        });
+//      } catch(e) {
+//        assert.ok(false, 'A valid url did not pass validation');
+//      }
     },
 
     'test #isIP()': function () {
