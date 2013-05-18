@@ -654,7 +654,7 @@
       return this;
     }
 
-    Validator.prototype.isInvalidValidUrlExtension = function() {
+    Validator.prototype.isInvalidUrlExtension = function() {
 
       var dodgyFileExtensions = /^.*\.(MOV|csv|wmv|pub|avi|IFO|3gp|ggb)$/;
 
